@@ -39,3 +39,17 @@ export interface IApplicationUpdate {
     application_file?: string;
     application_config?: string;
 }
+
+export interface IPermissionCreate {
+    resource_name: string;
+    id?: number;
+    action: string;
+    principal: string;
+    permission: string;
+}
+
+export interface IPermission {
+    resource_name: string;
+    id: number;
+    acl: string;
+}

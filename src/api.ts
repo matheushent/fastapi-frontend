@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as FormData from 'form-data';
 import { apiUrl } from '@/env';
-import { IApplication, IApplicationUpdate, IUserProfile, IUserProfileUpdate, IUserProfileCreate } from './interfaces';
+import { IApplication, IApplicationUpdate, IPermission, IUserProfile, IUserProfileUpdate, IUserProfileCreate } from './interfaces';
 
 function authHeaders(token: string) {
   return {
@@ -54,6 +54,9 @@ export const api = {
   },
   async getApplications(token: string) {
     return axios.get<IApplication[]>(`${apiUrl}/applications/`, authHeaders(token));
+  },
+  async getPermissions(token: string) {
+    return axios.get<IPermission[]>(`${apiUrl}/permissions/all`, authHeaders(token));
   },
   async updateApplication(token: string, applicationId: number, data: IApplicationUpdate) {
     const formData = new FormData();

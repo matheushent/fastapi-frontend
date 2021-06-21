@@ -61,7 +61,6 @@ export default new Router({
             {
               path: 'admin',
               component: () => import(/* webpackChunkName: "main-admin" */ './views/main/admin/Admin.vue'),
-              redirect: 'admin/users/all',
               children: [
                 {
                   path: 'users',
@@ -83,6 +82,14 @@ export default new Router({
                   name: 'main-admin-users-create',
                   component: () => import(
                     /* webpackChunkName: "main-admin-users-create" */ './views/main/admin/CreateUser.vue'),
+                },
+                {
+                  path: 'permissions',
+                  component: () => import('./views/main/admin/Permissions.vue'),
+                },
+                {
+                  path: 'permissions/create',
+                  component: () => import('./views/main/admin/CreatePermission.vue'),
                 },
               ],
             },

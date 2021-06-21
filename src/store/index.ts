@@ -5,6 +5,7 @@ import { mainModule } from './main';
 import { State } from './state';
 import { adminModule } from './admin';
 import { applicationModule } from './applications';
+import { permissionModule } from './permissions';
 
 Vue.use(Vuex);
 
@@ -13,6 +14,7 @@ const storeOptions: StoreOptions<State> = {
     main: mainModule,
     admin: adminModule,
     application: applicationModule,
+    permission: permissionModule,
   },
 };
 
