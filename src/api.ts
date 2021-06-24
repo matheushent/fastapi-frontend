@@ -1,7 +1,10 @@
 import axios from 'axios';
 import * as FormData from 'form-data';
 import { apiUrl } from '@/env';
-import { IApplication, IApplicationUpdate, IPermission, IUserProfile, IUserProfileUpdate, IUserProfileCreate } from './interfaces';
+import {
+  IApplication, IApplicationUpdate, IPermission, IPermissionCreate, IUserProfile,
+  IUserProfileUpdate, IUserProfileCreate,
+} from './interfaces';
 
 function authHeaders(token: string) {
   return {
@@ -57,6 +60,12 @@ export const api = {
   },
   async getPermissions(token: string) {
     return axios.get<IPermission[]>(`${apiUrl}/permissions/all`, authHeaders(token));
+  },
+  async createPermission(token: string, data: IPermissionCreate) {
+    const bodyRequest = new FormData();
+    bodyRequest.append('acl', data.action + '|' + data.principal + '|' + data.permission);
+    return axios.post(`${apiUrl}/permissions/?permission_query=` + data.resource_name, bodyRequest,
+                      authHeaders(token));
   },
   async updateApplication(token: string, applicationId: number, data: IApplicationUpdate) {
     const formData = new FormData();

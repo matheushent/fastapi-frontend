@@ -28,12 +28,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import {
-  IUserProfile,
-  IUserProfileUpdate,
-  IUserProfileCreate,
-} from '@/interfaces';
-import { dispatchGetUsers, dispatchCreateUser } from '@/store/admin/actions';
+import { IPermissionCreate } from '@/interfaces';
+import { dispatchCreatePermission } from '@/store/permissions_create/actions';
 
 
 @Component
@@ -57,7 +53,14 @@ export default class CreatePermission extends Vue {
   }
 
   public async submit() {
-      this.$router.push('/main/admin/users');
+    const createdPermission: IPermissionCreate = {
+      resource_name: this.resource.toLowerCase(),
+      action: this.action,
+      principal: this.principal.toLowerCase(),
+      permission: this.permission.toLowerCase(),
+    };
+    await dispatchCreatePermission(this.$store, createdPermission);
+    this.$router.push('/main/admin/permissions');
   }
 }
 </script>
