@@ -61,6 +61,10 @@ export const api = {
   async getPermissions(token: string) {
     return axios.get<IPermission[]>(`${apiUrl}/permissions/all`, authHeaders(token));
   },
+  async deletePermissions(token: string, payload) {
+    return axios.delete(`${apiUrl}/permissions/${payload.id}?permission_query=` + payload.resourceName,
+                        authHeaders(token));
+  },
   async createPermission(token: string, data: IPermissionCreate) {
     const bodyRequest = new FormData();
     bodyRequest.append('acl', data.action + '|' + data.principal + '|' + data.permission);

@@ -11,6 +11,14 @@
       <template slot="items" slot-scope="props">
         <td>{{ props.item.resource_name }}</td>
         <td>{{ props.item.acl }}</td>
+        <td class="justify-center layout px-0">
+          <v-tooltip top>
+            <span>Delete</span>
+            <v-btn slot="activator" flat @click="deletePermission(props.item.id, props.item.resource_name)">
+              <v-icon>delete</v-icon>
+            </v-btn>
+          </v-tooltip>
+        </td>
       </template>
     </v-data-table>
   </div>
@@ -21,7 +29,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Store } from 'vuex';
 import { IPermission } from '@/interfaces';
 import { readAdminPermissions } from '@/store/permissions/getters';
-import { dispatchGetPermissions } from '@/store/permissions/actions';
+import { dispatchGetPermissions, dispatchDeletePermissions } from '@/store/permissions/actions';
 
 @Component
 export default class AdminPermissions extends Vue {
@@ -38,6 +46,11 @@ export default class AdminPermissions extends Vue {
       value: 'acl',
       align: 'left',
     },
+    {
+      text: 'Delete',
+      align: 'center',
+      sortable: false,
+    },
   ];
   get permissions() {
     return readAdminPermissions(this.$store);
@@ -45,6 +58,11 @@ export default class AdminPermissions extends Vue {
 
   public async mounted() {
     await dispatchGetPermissions(this.$store);
+  }
+  public async deletePermission(id, resourceName) {
+    const payload = {id, resourceName};
+    await dispatchDeletePermissions(this.$store, payload);
+    this.$router.go(0);
   }
 }
 </script>

@@ -40,7 +40,7 @@ export default class CreatePermission extends Vue {
   public principal: string = '';
   public permission: string = '';
   public actionsItems: string[] = ['Allow', 'Deny'];
-  public resourcesItems: string[] = ['Application', 'JobScript', 'JobSubmission'];
+  public resourcesItems: string[] = ['Application', 'Job_Script', 'Job_Submission'];
   public permissionsItems: string[] = ['Create', 'View', 'Update', 'Delete'];
 
 
@@ -56,7 +56,7 @@ export default class CreatePermission extends Vue {
     const createdPermission: IPermissionCreate = {
       resource_name: this.resource.toLowerCase(),
       action: this.action,
-      principal: this.principal.toLowerCase(),
+      principal: this.principal,
       permission: this.permission.toLowerCase(),
     };
     await dispatchCreatePermission(this.$store, createdPermission);
