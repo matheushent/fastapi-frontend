@@ -80,6 +80,11 @@
                 </v-text-field>
               </v-flex>
             </v-layout>
+            <v-text-field
+              label="Principals"
+              v-model="principals"
+              required
+            ></v-text-field>
           </v-form>
         </template>
       </v-card-text>
@@ -114,6 +119,7 @@ export default class EditUser extends Vue {
   public setPassword = false;
   public password1: string = '';
   public password2: string = '';
+  public principals: string = '';
 
   public async mounted() {
     await dispatchGetUsers(this.$store);
@@ -130,6 +136,7 @@ export default class EditUser extends Vue {
       this.email = this.user.email;
       this.isActive = this.user.is_active;
       this.isSuperuser = this.user.is_superuser;
+      this.principals = this.user.principals;
     }
   }
 
@@ -151,6 +158,7 @@ export default class EditUser extends Vue {
       if (this.setPassword) {
         updatedProfile.password = this.password1;
       }
+      updatedProfile.principals = this.principals;
       await dispatchUpdateUser(this.$store, { id: this.user!.id, user: updatedProfile });
       this.$router.push('/main/admin/users');
     }
