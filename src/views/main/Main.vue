@@ -47,7 +47,7 @@
               <v-list-tile-title>Manage Applications</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-list-tile to="/main/admin/users/all">
+          <v-list-tile to="/main/resources/job-scripts/all">
             <v-list-tile-action>
               <v-icon>edit</v-icon>
             </v-list-tile-action>
@@ -55,7 +55,7 @@
               <v-list-tile-title>Manage JobScripts</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-list-tile to="/main/admin/users/all">
+          <v-list-tile to="/main/resources/job-submissions/all">
             <v-list-tile-action>
               <v-icon>edit</v-icon>
             </v-list-tile-action>

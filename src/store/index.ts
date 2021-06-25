@@ -5,6 +5,8 @@ import { mainModule } from './main';
 import { State } from './state';
 import { adminModule } from './admin';
 import { applicationModule } from './applications';
+import { jobscriptModule } from './jobscripts';
+import { jobsubmissionModule } from './jobsubmissions';
 import { permissionModule } from './permissions';
 import { permissionCreateModule } from './permissions_create';
 
@@ -17,6 +19,8 @@ const storeOptions: StoreOptions<State> = {
     application: applicationModule,
     permission: permissionModule,
     permissionCreate: permissionCreateModule,
+    jobscript: jobscriptModule,
+    jobsubmission: jobsubmissionModule,
   },
 };
 

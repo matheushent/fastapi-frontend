@@ -56,3 +56,39 @@ export interface IPermission {
     id: number;
     acl: string;
 }
+
+export interface IJobScript {
+    id: number;
+    job_script_name: string;
+    job_script_description: string;
+    job_script_data_as_string: string;
+    job_script_owner_id: number;
+    application_id: number;
+}
+
+export interface IJobScriptUpdate {
+    id?: number;
+    job_script_name?: string;
+    job_script_description?: string;
+    job_script_data_as_string?: string;
+    job_script_owner_id?: number;
+    application_id?: number;
+}
+
+export interface IJobSubmission {
+    id: number;
+    job_submission_name: string;
+    job_submission_description: string;
+    job_script_id: number;
+    job_submission_owner_id: number;
+    slurm_job_id: number;
+}
+
+export interface IJobSubmissionUpdate {
+    id?: number;
+    job_submission_name?: string;
+    job_submission_description?: string;
+    job_script_id?: number;
+    job_submission_owner_id?: number;
+    slurm_job_id?: number;
+}

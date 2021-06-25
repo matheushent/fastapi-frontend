@@ -2,24 +2,25 @@
   <div>
     <v-toolbar light>
       <v-toolbar-title>
-        Manage Applications
+        Manage JobScripts
       </v-toolbar-title>
     </v-toolbar>
-    <v-data-table :headers="headers" :items="applications">
+    <v-data-table :headers="headers" :items="jobscripts">
       <template slot="items" slot-scope="props">
         <td>{{ props.item.id }}</td>
-        <td>{{ props.item.application_name }}</td>
-        <td>{{ props.item.application_owner_id }}</td>
+        <td>{{ props.item.job_script_name }}</td>
+        <td>{{ props.item.job_script_owner_id }}</td>
+        <td>{{ props.item.application_id }}</td>
         <td class="justify-center layout px-0">
           <v-tooltip top>
             <span>Edit</span>
-            <v-btn slot="activator" flat :to="{name: 'main-resources-applications-edit', params: {id: props.item.id}}">
+            <v-btn slot="activator" flat :to="{name: 'main-resources-job-scripts-edit', params: {id: props.item.id}}">
               <v-icon>edit</v-icon>
             </v-btn>
           </v-tooltip>
           <v-tooltip top>
             <span>Delete</span>
-            <v-btn slot="activator" flat @click="deleteApplication(props.item.id)">
+            <v-btn slot="activator" flat @click="deleteJobScript(props.item.id)">
               <v-icon>delete</v-icon>
             </v-btn>
           </v-tooltip>
@@ -32,12 +33,12 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { Store } from 'vuex';
-import { IApplication } from '@/interfaces';
-import { readResourcesApplications } from '@/store/applications/getters';
-import { dispatchGetApplications, dispatchDeleteApplication } from '@/store/applications/actions';
+import { IJobScript } from '@/interfaces';
+import { readResourcesJobScripts } from '@/store/jobscripts/getters';
+import { dispatchGetJobScripts, dispatchDeleteJobScript } from '@/store/jobscripts/actions';
 
 @Component
-export default class ApplicationsList extends Vue {
+export default class JobScriptsList extends Vue {
   public headers = [
     {
       text: 'ID',
@@ -46,15 +47,21 @@ export default class ApplicationsList extends Vue {
       align: 'left',
     },
     {
-      text: 'Application Name',
+      text: 'JobScript Name',
       sortable: true,
-      value: 'application_name',
+      value: 'job_script_name',
       align: 'left',
     },
     {
-      text: 'Application Owner ID',
+      text: 'JobScript Owner ID',
       sortable: true,
-      value: 'application_owner_id',
+      value: 'job_script_owner_id',
+      align: 'left',
+    },
+    {
+      text: 'Application ID',
+      sortable: true,
+      value: 'application_id',
       align: 'left',
     },
     {
@@ -65,15 +72,16 @@ export default class ApplicationsList extends Vue {
     },
   ];
   get applications() {
-    return readResourcesApplications(this.$store);
+    return readResourcesJobScripts(this.$store);
   }
 
   public async mounted() {
-    await dispatchGetApplications(this.$store);
+    await dispatchGetJobScripts(this.$store);
   }
-  public async deleteApplication(id) {
+
+  public async deleteJobScript(id) {
     const payload = {id};
-    await dispatchDeleteApplication(this.$store, payload);
+    await dispatchDeleteJobScript(this.$store, payload);
     this.$router.go(0);
   }
 }

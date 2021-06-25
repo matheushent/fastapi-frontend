@@ -96,7 +96,6 @@ export default new Router({
             {
               path: 'resources',
               component: RouterComponent,
-              redirect: 'resources/applications/all',
               children: [
                 {
                   path: 'applications',
@@ -113,10 +112,32 @@ export default new Router({
                     './views/main/resources/EditApplication.vue'),
                 },
                 {
-                  path: 'users/create',
-                  name: 'main-admin-users-create',
+                  path: 'job-scripts',
+                  redirect: 'job-scripts/all',
+                },
+                {
+                  path: 'job-scripts/all',
+                  component: () => import('./views/main/resources/JobScriptsList.vue'),
+                },
+                {
+                  path: 'job-scripts/edit/:id',
+                  name: 'main-resources-job-scripts-edit',
                   component: () => import(
-                    /* webpackChunkName: "main-admin-users-create" */ './views/main/admin/CreateUser.vue'),
+                    './views/main/resources/EditJobScript.vue'),
+                },
+                {
+                  path: 'job-submissions',
+                  redirect: 'job-submissions/all',
+                },
+                {
+                  path: 'job-submissions/all',
+                  component: () => import('./views/main/resources/JobSubmissionsList.vue'),
+                },
+                {
+                  path: 'job-submissions/edit/:id',
+                  name: 'main-resources-job-submissions-edit',
+                  component: () => import(
+                    './views/main/resources/EditJobSubmission.vue'),
                 },
               ],
             },

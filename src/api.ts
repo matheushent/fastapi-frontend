@@ -2,8 +2,8 @@ import axios from 'axios';
 import * as FormData from 'form-data';
 import { apiUrl } from '@/env';
 import {
-  IApplication, IApplicationUpdate, IPermission, IPermissionCreate, IUserProfile,
-  IUserProfileUpdate, IUserProfileCreate,
+  IApplication, IApplicationUpdate, IJobScript, IJobScriptUpdate, IJobSubmission, IJobSubmissionUpdate,
+  IPermission, IPermissionCreate, IUserProfile, IUserProfileUpdate, IUserProfileCreate,
 } from './interfaces';
 
 function authHeaders(token: string) {
@@ -55,18 +55,12 @@ export const api = {
       token,
     });
   },
-  async getApplications(token: string) {
-    return axios.get<IApplication[]>(`${apiUrl}/applications/`, authHeaders(token));
-  },
   async getPermissions(token: string) {
     return axios.get<IPermission[]>(`${apiUrl}/permissions/all`, authHeaders(token));
   },
   async deletePermissions(token: string, payload) {
     return axios.delete(`${apiUrl}/permissions/${payload.id}?permission_query=` + payload.resourceName,
                         authHeaders(token));
-  },
-  async deleteApplication(token: string, payload) {
-    return axios.delete(`${apiUrl}/applications/${payload.id}`, authHeaders(token));
   },
   async createPermission(token: string, data: IPermissionCreate) {
     const bodyRequest = new FormData();
@@ -80,5 +74,37 @@ export const api = {
       formData.append(property, data[property]);
     }
     return axios.put(`${apiUrl}/applications/${applicationId}`, formData, authHeadersForm(token));
+  },
+  async getApplications(token: string) {
+    return axios.get<IApplication[]>(`${apiUrl}/applications/`, authHeaders(token));
+  },
+  async deleteApplication(token: string, payload) {
+    return axios.delete(`${apiUrl}/applications/${payload.id}`, authHeaders(token));
+  },
+  async updateJobScript(token: string, jobScriptId: number, data: IJobScriptUpdate) {
+    const formData = new FormData();
+    for ( const property of Object.keys(data) ) {
+      formData.append(property, data[property]);
+    }
+    return axios.put(`${apiUrl}/job-scripts/${jobScriptId}`, formData, authHeadersForm(token));
+  },
+  async getJobScripts(token: string) {
+    return axios.get<IJobScript[]>(`${apiUrl}/job-scripts/`, authHeaders(token));
+  },
+  async deleteJobScript(token: string, payload) {
+    return axios.delete(`${apiUrl}/job-scripts/${payload.id}`, authHeaders(token));
+  },
+  async updateJobSubmission(token: string, jobSubmissionId: number, data: IJobSubmissionUpdate) {
+    const formData = new FormData();
+    for ( const property of Object.keys(data) ) {
+      formData.append(property, data[property]);
+    }
+    return axios.put(`${apiUrl}/job-submission/${jobSubmissionId}`, formData, authHeadersForm(token));
+  },
+  async getJobSubmissions(token: string) {
+    return axios.get<IJobSubmission[]>(`${apiUrl}/job-submissions/`, authHeaders(token));
+  },
+  async deleteJobSubmission(token: string, payload) {
+    return axios.delete(`${apiUrl}/job-submissions/${payload.id}`, authHeaders(token));
   },
 };
