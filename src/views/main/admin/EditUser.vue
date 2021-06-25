@@ -27,15 +27,6 @@
               v-model="fullName"
               required
             ></v-text-field>
-            <v-text-field
-              label="E-mail"
-              type="email"
-              v-model="email"
-              v-validate="'required|email'"
-              data-vv-name="email"
-              :error-messages="errors.collect('email')"
-              required
-            ></v-text-field>
             <div class="subheading secondary--text text--lighten-2">User is superuser <span v-if="isSuperuser">(currently is a superuser)</span><span v-else>(currently is not a superuser)</span></div>
             <v-checkbox
               label="Is Superuser"
@@ -113,7 +104,6 @@ import { readAdminOneUser } from '@/store/admin/getters';
 export default class EditUser extends Vue {
   public valid = true;
   public fullName: string = '';
-  public email: string = '';
   public isActive: boolean = true;
   public isSuperuser: boolean = false;
   public setPassword = false;
@@ -133,7 +123,6 @@ export default class EditUser extends Vue {
     this.$validator.reset();
     if (this.user) {
       this.fullName = this.user.full_name;
-      this.email = this.user.email;
       this.isActive = this.user.is_active;
       this.isSuperuser = this.user.is_superuser;
       this.principals = this.user.principals;
@@ -149,9 +138,6 @@ export default class EditUser extends Vue {
       const updatedProfile: IUserProfileUpdate = {};
       if (this.fullName) {
         updatedProfile.full_name = this.fullName;
-      }
-      if (this.email) {
-        updatedProfile.email = this.email;
       }
       updatedProfile.is_active = this.isActive;
       updatedProfile.is_superuser = this.isSuperuser;
