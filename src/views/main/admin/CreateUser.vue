@@ -20,12 +20,12 @@
                 <v-text-field type="password" label="Confirm Password" data-vv-name="password_confirmation" data-vv-delay="100" data-vv-as="password" v-validate="{required: true, confirmed: 'password'}" v-model="password2" :error-messages="errors.first('password_confirmation')">
                 </v-text-field>
               </v-flex>
-              <v-text-field
-                  label="Principals"
-                  v-model="principals"
-                  required
-                  ></v-text-field>
             </v-layout>
+            <v-text-field
+                label="Principals"
+                v-model="principals"
+                required
+                ></v-text-field>
           </v-form>
         </template>
       </v-card-text>
