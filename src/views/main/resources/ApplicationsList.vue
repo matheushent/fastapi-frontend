@@ -19,6 +19,12 @@
               <v-icon>edit</v-icon>
             </v-btn>
           </v-tooltip>
+          <v-tooltip top>
+            <span>Delete</span>
+            <v-btn slot="activator" flat @click="deleteApplication(props.item.id)">
+              <v-icon>delete</v-icon>
+            </v-btn>
+          </v-tooltip>
         </td>
       </template>
     </v-data-table>
@@ -30,7 +36,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Store } from 'vuex';
 import { IApplication } from '@/interfaces';
 import { readResourcesApplications } from '@/store/applications/getters';
-import { dispatchGetApplications } from '@/store/applications/actions';
+import { dispatchGetApplications, dispatchDeleteApplication } from '@/store/applications/actions';
 
 @Component
 export default class ApplicationsList extends Vue {
@@ -55,7 +61,9 @@ export default class ApplicationsList extends Vue {
     },
     {
       text: 'Actions',
+      sortable: false,
       value: 'id',
+      align: 'center',
     },
   ];
   get applications() {
@@ -64,6 +72,11 @@ export default class ApplicationsList extends Vue {
 
   public async mounted() {
     await dispatchGetApplications(this.$store);
+  }
+  public async deleteApplication(id) {
+    const payload = {id};
+    await dispatchDeleteApplication(this.$store, payload);
+    this.$router.go(0);
   }
 }
 </script>

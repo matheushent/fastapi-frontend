@@ -20,6 +20,11 @@
                 <v-text-field type="password" label="Confirm Password" data-vv-name="password_confirmation" data-vv-delay="100" data-vv-as="password" v-validate="{required: true, confirmed: 'password'}" v-model="password2" :error-messages="errors.first('password_confirmation')">
                 </v-text-field>
               </v-flex>
+              <v-text-field
+                  label="Principals"
+                  v-model="principals"
+                  required
+                  ></v-text-field>
             </v-layout>
           </v-form>
         </template>
@@ -55,6 +60,7 @@ export default class CreateUser extends Vue {
   public setPassword = false;
   public password1: string = '';
   public password2: string = '';
+  public principals: string = '';
 
   public async mounted() {
     await dispatchGetUsers(this.$store);
@@ -68,6 +74,7 @@ export default class CreateUser extends Vue {
     this.email = '';
     this.isActive = true;
     this.isSuperuser = false;
+    this.principals = '';
     this.$validator.reset();
   }
 
@@ -85,6 +92,9 @@ export default class CreateUser extends Vue {
       }
       if (this.email) {
         updatedProfile.email = this.email;
+      }
+      if (this.principals) {
+        updatedProfile.principals = this.principals;
       }
       updatedProfile.is_active = this.isActive;
       updatedProfile.is_superuser = this.isSuperuser;

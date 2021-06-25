@@ -65,6 +65,9 @@ export const api = {
     return axios.delete(`${apiUrl}/permissions/${payload.id}?permission_query=` + payload.resourceName,
                         authHeaders(token));
   },
+  async deleteApplication(token: string, payload) {
+    return axios.delete(`${apiUrl}/applications/${payload.id}`, authHeaders(token));
+  },
   async createPermission(token: string, data: IPermissionCreate) {
     const bodyRequest = new FormData();
     bodyRequest.append('acl', data.action + '|' + data.principal + '|' + data.permission);

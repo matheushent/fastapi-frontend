@@ -19,6 +19,8 @@ export const actions = {
             }
         } catch (error) {
             await dispatchCheckApiError(context, error);
+            commitAddNotification(context, { content: 'You don\'t have permission to view applications',
+                                  color: 'failure'});
         }
     },
     async actionUpdateApplication(context: MainContext, payload: { id: number, application: IApplicationUpdate }) {
@@ -34,6 +36,17 @@ export const actions = {
             commitAddNotification(context, { content: 'Application successfully updated', color: 'success' });
         } catch (error) {
             await dispatchCheckApiError(context, error);
+            commitAddNotification(context, { content: 'You don\'t have permission to edit applications',
+                                  color: 'failure'});
+        }
+    },
+    async actionDeleteApplication(context: MainContext, payload: {id: string}) {
+        try {
+            const response = await api.deleteApplication(context.rootState.main.token, payload);
+        } catch (error) {
+            await dispatchCheckApiError(context, error);
+            commitAddNotification(context, { content: 'You don\'t have permission to delete applications',
+                                  color: 'failure'});
         }
     },
 };
@@ -42,3 +55,4 @@ const { dispatch } = getStoreAccessors<ApplicationState, State>('');
 
 export const dispatchGetApplications = dispatch(actions.actionGetApplications);
 export const dispatchUpdateApplication = dispatch(actions.actionUpdateApplication);
+export const dispatchDeleteApplication = dispatch(actions.actionDeleteApplication);
