@@ -76,7 +76,7 @@ export const api = {
     return axios.put(`${apiUrl}/applications/${applicationId}`, formData, authHeadersForm(token));
   },
   async getApplications(token: string) {
-    return axios.get<IApplication[]>(`${apiUrl}/applications/`, authHeaders(token));
+    return axios.get<IApplication[]>(`${apiUrl}/applications/?all=true`, authHeaders(token));
   },
   async deleteApplication(token: string, payload) {
     return axios.delete(`${apiUrl}/applications/${payload.id}`, authHeaders(token));
@@ -89,7 +89,7 @@ export const api = {
     return axios.put(`${apiUrl}/job-scripts/${jobScriptId}`, formData, authHeadersForm(token));
   },
   async getJobScripts(token: string) {
-    return axios.get<IJobScript[]>(`${apiUrl}/job-scripts/`, authHeaders(token));
+    return axios.get<IJobScript[]>(`${apiUrl}/job-scripts/?all=true`, authHeaders(token));
   },
   async deleteJobScript(token: string, payload) {
     return axios.delete(`${apiUrl}/job-scripts/${payload.id}`, authHeaders(token));
@@ -102,7 +102,7 @@ export const api = {
     return axios.put(`${apiUrl}/job-submission/${jobSubmissionId}`, formData, authHeadersForm(token));
   },
   async getJobSubmissions(token: string) {
-    return axios.get<IJobSubmission[]>(`${apiUrl}/job-submissions/`, authHeaders(token));
+    return axios.get<IJobSubmission[]>(`${apiUrl}/job-submissions/?all=true`, authHeaders(token));
   },
   async deleteJobSubmission(token: string, payload) {
     return axios.delete(`${apiUrl}/job-submissions/${payload.id}`, authHeaders(token));
