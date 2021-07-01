@@ -50,7 +50,7 @@ class Base(core.Stack):
         )
 
         # codebuild iam permissions to read write s3
-        bucket.grant_read_write(build.role)
+        bucket.grant_read_write(build)
 
         self.output_props = props.copy()
         self.output_props["build"] = build
