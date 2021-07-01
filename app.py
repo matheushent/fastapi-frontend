@@ -9,7 +9,7 @@ from stacks.base import Base
 
 common_tags = {"Application": "jobbergate2", "project": "Jobbergate"}
 
-props = {"namespace": "jobbergate2"}
+props = {"namespace": "jobbergate2-frontend"}
 
 env = core.Environment(account="212021838531", region="us-east-1")
 
