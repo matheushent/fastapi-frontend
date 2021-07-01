@@ -4,6 +4,7 @@ phases:
   install:
     runtime-versions:
       nodejs: 14
+      python: 3.8
     commands:
       - echo Installing
   pre_build:
@@ -13,8 +14,8 @@ phases:
   build:
     commands:
       - npm run build
-      - pip3 install 
-      - requirements.txt
+      - pip3 install -U pip wheel
+      - pip3 install -r requirements.txt
   post_build:
     commands:
       - echo Build completed on `date`
