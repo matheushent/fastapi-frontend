@@ -48,7 +48,7 @@ class Staging(core.Stack):
 
         certificate = cm.Certificate.from_certificate_arn(
             self, "AwsCertificate",
-            certificate_arn="arn:aws:acm:eu-north-1:212021838531:certificate/ad8be636-aa4b-48d4-a9a0-93642c8855b6"
+            certificate_arn="arn:aws:acm:us-east-1:212021838531:certificate/a2b9fa93-6bf2-4e87-a476-6cb77a30919a"
         )
 
         distribution = cloudfront.CloudFrontWebDistribution(

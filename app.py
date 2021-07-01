@@ -11,7 +11,7 @@ common_tags = {"Application": "jobbergate2", "project": "Jobbergate"}
 
 props = {"namespace": "jobbergate2"}
 
-env = core.Environment(account="212021838531", region="eu-north-1")
+env = core.Environment(account="212021838531", region="us-east-1")
 
 app = core.App()
 
