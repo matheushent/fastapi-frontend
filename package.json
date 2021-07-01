@@ -6,7 +6,9 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "easy-deploy:staging": "aws s3 sync dist/ s3://dashboard-jobbergateapi2-staging.omnivector.solutions --delete",
+    "deploy:staging": "sh push.sh jobbergate2-source-bucket-staging"
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
