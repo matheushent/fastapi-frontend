@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-version:
+      nodejs: 14
+    commands:
+      - echo Installing
+  pre_build:
+    commands:
+      - npm i
+      - npm i -g aws-cdk
+  build:
+    commands:
+      - npm run build
+      - pip3 install 
+      - requirements.txt
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Synthing app
+      - cdk synth '*' -o .
+artifacts:
+  files:
+    - '**/*'

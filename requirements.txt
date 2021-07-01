@@ -1,0 +1,12 @@
+aws_cdk.core==1.110.1
+aws_cdk.aws_s3==1.110.1
+aws_cdk.pipelines==1.110.1
+aws_cdk.aws_lambda==1.110.1
+aws_cdk.aws_route53==1.110.1
+aws_cdk.aws_codebuild==1.110.1
+aws_cdk.aws_cloudfront==1.110.1
+aws_cdk.aws_codepipeline==1.110.1
+aws_cdk.aws_s3_deployment==1.110.1
+aws_cdk.aws_route53_targets==1.110.1
+aws_cdk.aws_certificatemanager==1.110.1
+aws_cdk.aws_codepipeline_actions==1.110.1
